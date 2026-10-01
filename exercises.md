@@ -152,31 +152,31 @@ và quyết định thiết kế, không chép lại toàn bộ QA.
 
 | Hạng mục | Kết quả |
 |---|---|
-| Tổng số records | ____ / 20 |
-| Easy | ____ / 5 |
-| Medium | ____ / 7 |
-| Hard | ____ / 5 |
-| Adversarial | ____ / 3 |
-| Source documents được sử dụng | ____ / 10 |
-| Validator status | PASS / FAIL |
+| Tổng số records | 20 / 20 |
+| Easy | 5 / 5 |
+| Medium | 7 / 7 |
+| Hard | 5 / 5 |
+| Adversarial | 3 / 3 |
+| Source documents được sử dụng | 10 / 10 |
+| Validator status | PASS |
 
 **Ba case đại diện cho quyết định thiết kế**
 
 | ID | Difficulty | Source document(s) | Vì sao case phù hợp với difficulty/attack type? |
 |---|---|---|---|
-| | | | |
-| | | | |
-| | | | |
+| H01 | Hard | 09_escalation_and_policy_updates.md | Yêu cầu phải xử lý suy luận (reasoning) phức tạp về ngày tháng hiệu lực của chính sách bảo hành/hoàn trả, bắt LLM phải phân biệt giữa phiên bản 1.0 (trước 1/9/2026) và 2.0 (từ 1/9/2026). |
+| M01 | Medium | 03_promotions_and_membership.md, 05_returns_and_exchanges.md | Đòi hỏi RAG phải tổng hợp thông tin từ 2 tài liệu khác nhau: biết được thời hạn trả hàng chuẩn là 30 ngày (file 05), và OrbitPlus mở rộng thêm thành 45 ngày (file 03). |
+| A01 | Adversarial | 00_system_scope.md | Đóng vai khách hàng hỏi cách bypass tính năng bảo mật (activation lock). Bài test này nhằm kiểm tra safety guardrails xem hệ thống có nhận diện "out of scope" để từ chối trả lời an toàn hay không. |
 
 **Điểm khó nhất khi xây dựng expected answer hoặc evidence là gì?**
 
-> *Câu trả lời:*
+> *Câu trả lời:* Điểm khó nhất là phải giữ cho evidence (context) khớp chính xác 100% (verbatim substring) với tài liệu gốc. Khi soạn thảo, chúng ta rất dễ có xu hướng nối hai câu lại với nhau hoặc tóm tắt ý chính. Việc bắt buộc dùng đoạn trích dẫn gốc (exact text) đôi khi làm câu trả lời dài dòng hơn hoặc phải trích nguyên một câu có chứa nhiều thông tin không liên quan.
 
 **Xác nhận:**
 
-- [ ] Mọi claim trong expected answer đều có evidence hỗ trợ.
-- [ ] Không có questions trùng ý và không dùng kiến thức ngoài corpus.
-- [ ] `python validate_golden_dataset.py` báo `PASS`.
+- [x] Mọi claim trong expected answer đều có evidence hỗ trợ.
+- [x] Không có questions trùng ý và không dùng kiến thức ngoài corpus.
+- [x] `python validate_golden_dataset.py` báo `PASS`.
 
 ### Exercise 3.2 — Benchmark Run
 
